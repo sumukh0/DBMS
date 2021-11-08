@@ -1,0 +1,16 @@
+create table publisher (name varchar(20), address varchar(20),phone integer(10),primary key(name));
+create table book(book_id integer(10),title varchar(20),publisher_name varchar(20),pub_year integer(10),primary key(book_id),foreign key(publisher_name)references publisher(name));
+create table library_programme(programme_id integer(10),programme_name varchar(20),address varchar(20),primary key(programme_id));
+create table book_author(book_id integer(10),author_name varchar(20),primary key(book_id),foreign key(book_id)references book(book_id));
+create table book_copies(book_id integer(10),programme_id integer(10),no_of_copies integer(10),primary key(book_id,programme_id),foreign key(book_id)references book(book_id),foreign key(programme_id)references library_programme(programme_id));
+create table book_lending(book_id integer(10),programme_id integer(10),cart_no integer(10),date_out date,due_date date,primary key(book_id,programme_id,cart_no),foreign key(book_id) references book(book_id) on delete cascade,foreign key(programme_id) references library_programme(programme_id) on delete cascade);
+
+insert into publisher values("PERSON","BANGALORE",96038475);
+insert into publisher values("MCGRAW","NEWDELHI",96038476)
+insert into publisher values("SWAPNA","MANGALORE",96038477);
+insert into publisher values("OXFORD","NEWDELHI",96038478);
+
+insert into book values (100","BMS","PERSON",2005);
+insert into book values (101","SE","MCGRAW",2004);
+insert into book values (102","CO",SWAPNA",2010);
+insert into book values (103","DMS",OXFORD",2010);
